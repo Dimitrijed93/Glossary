@@ -10,6 +10,7 @@ services:
         ports: 
             - "5432:5432"
     server:
+        container_name: api
         build:
             context: ./api
             dockerfile: Dockerfile
@@ -22,6 +23,7 @@ services:
         ports: 
             - "9090:9090"
     frontend:
+        container_name: ui
         build:
             context: ./frontend
             dockerfile: Dockerfile

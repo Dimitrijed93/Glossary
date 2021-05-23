@@ -4,6 +4,7 @@
       <slot name="columns">
         <tr>
           <th v-for="column in columns" :key="column">{{column}}</th>
+          <th></th>
         </tr>
       </slot>
     </thead>
@@ -11,7 +12,7 @@
     <tr v-for="(item, index) in data" :key="index">
       <slot :row="item">
         <td v-for="column in columns" :key="column" v-if="hasValue(item, column)">{{itemValue(item, column)}}</td>
-        <td></td>
+        <td class="removeIcon"><i class="nc-icon nc-simple-remove" /></td>
       </slot>
     </tr>
     </tbody>

@@ -10,6 +10,12 @@
         <i class="nc-icon nc-notes"></i>
         <p>Types</p>
       </sidebar-link>
+
+
+      <sidebar-link to="/admin/icons">
+        <i class="nc-icon nc-notes"></i>
+        <p>Icons</p>
+      </sidebar-link>
       
     </side-bar>
     <div class="main-panel">
