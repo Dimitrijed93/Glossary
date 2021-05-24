@@ -4,7 +4,8 @@ import (
 	"net/http"
 
 	models "github.com/dimitrijed93/glossary/api/models"
-	consts "github.com/dimitrijed93/glossary/api/util"
+	server "github.com/dimitrijed93/glossary/api/server"
+	util "github.com/dimitrijed93/glossary/api/util"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -15,7 +16,7 @@ import (
 func main() {
 	e := echo.New()
 
-	db, err := gorm.Open(postgres.Open(consts.CONNECTION_STRING), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(util.CONNECTION_STRING_LOCAL), &gorm.Config{})
 
 	if err != nil {
 		panic("failed to connect database")
@@ -28,6 +29,14 @@ func main() {
 	db.AutoMigrate(&models.Entry{})
 
 	sqlDB, err := db.DB()
+
+	v := util.NewValidator()
+
+	typeObj := models.NewType()
+	folder := models.NewFolder()
+
+	server.InitServer(typeObj, db, e, v)
+	server.InitServer(folder, db, e, v)
 
 	if err != nil {
 		panic("failed to get db object")
@@ -44,17 +53,7 @@ func main() {
 		return c.String(http.StatusOK, "Hello, World!")
 	})
 
-	typeObj := models.NewType()
-
-	e.GET(consts.TYPE_URL, typeObj.GetAll(db))
-
-	e.POST(consts.TYPE_URL, typeObj.Create(db))
-
-	e.DELETE(consts.TYPE_BY_ID_URL, typeObj.Delete(db))
-
-	e.PUT(consts.TYPE_BY_ID_URL, typeObj.Update(db))
-
-	e.Logger.Fatal(e.Start(consts.PORT))
+	e.Logger.Fatal(e.Start(util.PORT))
 
 }
 

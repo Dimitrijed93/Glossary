@@ -60,6 +60,8 @@ export default {
     .then(response => {
       this.types = response.data;
       console.log(JSON.stringify(response.data))
+      console.log(JSON.parse(JSON.stringify(response.data)))
+      console.log(JSON.parse(response.data))
     })
   },
   methods: {
