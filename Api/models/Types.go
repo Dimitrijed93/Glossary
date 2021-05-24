@@ -51,7 +51,7 @@ func (t *Type) Create(db *gorm.DB, v *util.Validator) func(c echo.Context) error
 
 		db.Save(typeObj)
 
-		return c.JSON(http.StatusOK, typeObj)
+		return c.JSON(http.StatusCreated, typeObj)
 	}
 
 }
@@ -76,7 +76,7 @@ func (t *Type) Update(db *gorm.DB, v *util.Validator) func(c echo.Context) error
 
 		db.Model(&typeObj).Where("id=?", typeId).Updates(&typeObj)
 
-		return c.JSON(http.StatusCreated, typeObj)
+		return c.JSON(http.StatusOK, typeObj)
 	}
 
 }

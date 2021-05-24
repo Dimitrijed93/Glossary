@@ -34,9 +34,15 @@ func main() {
 
 	typeObj := models.NewType()
 	folder := models.NewFolder()
+	item := models.NewExtraItem()
+	entry := models.NewEntry()
+	entryItem := models.NewEntryItem()
 
 	server.InitServer(typeObj, db, e, v)
 	server.InitServer(folder, db, e, v)
+	server.InitServer(item, db, e, v)
+	server.InitServer(entry, db, e, v)
+	server.InitServer(entryItem, db, e, v)
 
 	if err != nil {
 		panic("failed to get db object")
