@@ -19,13 +19,14 @@ import App from './App.vue'
 
 // LightBootstrap plugin
 import LightBootstrap from './light-bootstrap-main'
-
+import { BootstrapVue } from 'bootstrap-vue'
 // router setup
 import routes from './routes/routes'
 
 import './registerServiceWorker'
 // plugin setup
 Vue.use(VueRouter)
+Vue.use(BootstrapVue)
 Vue.use(LightBootstrap)
 
 // configure router
