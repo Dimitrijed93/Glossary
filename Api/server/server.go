@@ -11,6 +11,8 @@ func InitServer(model models.Model, db *gorm.DB, e *echo.Echo, v *util.Validator
 
 	e.GET(model.Url(), model.GetAll(db, v))
 
+	e.GET(model.DetailUrl(), model.GetById(db, v))
+
 	e.POST(model.Url(), model.Create(db, v))
 
 	e.DELETE(model.DetailUrl(), model.Delete(db, v))

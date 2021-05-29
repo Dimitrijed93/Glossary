@@ -36,6 +36,21 @@ func (t *Type) GetAll(db *gorm.DB, v *util.Validator) func(c echo.Context) error
 
 }
 
+func (t *Type) GetById(db *gorm.DB, v *util.Validator) func(c echo.Context) error {
+
+	return func(c echo.Context) error {
+		var tp Type
+		typeId := c.Param("id")
+		db.First(&tp, typeId)
+		if tp.Id != 0 {
+			return c.JSON(http.StatusOK, tp)
+		}
+		return c.JSON(http.StatusNoContent, nil)
+
+	}
+
+}
+
 func (t *Type) Create(db *gorm.DB, v *util.Validator) func(c echo.Context) error {
 
 	return func(c echo.Context) error {

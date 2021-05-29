@@ -10,6 +10,7 @@ import (
 
 type Model interface {
 	GetAll(db *gorm.DB, v *util.Validator) func(c echo.Context) error
+	GetById(db *gorm.DB, v *util.Validator) func(c echo.Context) error
 	Create(db *gorm.DB, v *util.Validator) func(c echo.Context) error
 	Update(db *gorm.DB, v *util.Validator) func(c echo.Context) error
 	Delete(db *gorm.DB, v *util.Validator) func(c echo.Context) error

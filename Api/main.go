@@ -16,7 +16,7 @@ import (
 func main() {
 	e := echo.New()
 
-	db, err := gorm.Open(postgres.Open(util.CONNECTION_STRING_K8), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(util.CONNECTION_STRING_LOCAL), &gorm.Config{})
 
 	if err != nil {
 		panic("failed to connect database")
@@ -27,6 +27,7 @@ func main() {
 	db.AutoMigrate(&models.Type{})
 	db.AutoMigrate(&models.EntryItem{})
 	db.AutoMigrate(&models.Entry{})
+	db.AutoMigrate(&models.Language{})
 
 	sqlDB, err := db.DB()
 

@@ -36,6 +36,18 @@ func (l *Language) GetAll(db *gorm.DB, v *util.Validator) func(c echo.Context) e
 
 }
 
+func (l *Language) GetById(db *gorm.DB, v *util.Validator) func(c echo.Context) error {
+
+	return func(c echo.Context) error {
+		var lang Language
+		langId := c.Param("id")
+		db.Model(&lang).Where("id=?", langId)
+
+		return c.JSON(http.StatusOK, lang)
+	}
+
+}
+
 func (l *Language) Create(db *gorm.DB, v *util.Validator) func(c echo.Context) error {
 
 	return func(c echo.Context) error {

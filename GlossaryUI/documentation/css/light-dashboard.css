@@ -14,6 +14,10 @@
 */
 /*      light colors - used for select dropdown         */
 /*           Social buttons            */
+
+.font-color {
+  color: red;
+}
 .ct-blue {
   stroke: #7A9E9F !important;
 }
@@ -7667,7 +7671,7 @@ star {
   border-radius: 6px;
   box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
   background-color: #FFFFFF;
-  color: #252422;
+  color: #9A9A9A;
   margin-bottom: 20px;
   position: relative;
 }
@@ -7737,7 +7741,7 @@ star {
 }
 .card .card-title {
   margin: 0;
-  color: #252422;
+  color: #9A9A9A;
   font-weight: 300;
 }
 .card .card-content {
@@ -8057,10 +8061,10 @@ star {
   margin-top: -65px;
 }
 .card-user .author .card-title {
-  color: #484541;
+  color: #9A9A9A;
 }
 .card-user .author .card-title small {
-  color: #ccc5b9;
+  color: #9A9A9A;
 }
 .card-user .avatar {
   width: 100px;

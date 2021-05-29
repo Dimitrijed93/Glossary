@@ -39,6 +39,18 @@ func (entryItem *EntryItem) GetAll(db *gorm.DB, v *util.Validator) func(c echo.C
 
 }
 
+func (entryItem *EntryItem) GetById(db *gorm.DB, v *util.Validator) func(c echo.Context) error {
+
+	return func(c echo.Context) error {
+		var entryItem Entry
+		itemId := c.Param("id")
+		db.Model(&entryItem).Where("id=?", itemId)
+
+		return c.JSON(http.StatusOK, entryItem)
+	}
+
+}
+
 func (entryItem *EntryItem) Create(db *gorm.DB, v *util.Validator) func(c echo.Context) error {
 
 	return func(c echo.Context) error {

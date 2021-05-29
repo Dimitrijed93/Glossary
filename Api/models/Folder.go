@@ -40,6 +40,20 @@ func (f *Folder) GetAll(db *gorm.DB, v *util.Validator) func(c echo.Context) err
 
 }
 
+func (f *Folder) GetById(db *gorm.DB, v *util.Validator) func(c echo.Context) error {
+
+	return func(c echo.Context) error {
+		var folder Folder
+		folderId := c.Param("id")
+		db.Preload("SourceLanguage").Preload("DestinationLanguage").Find(&folder, folderId)
+		if folder.Id != 0 {
+			return c.JSON(http.StatusOK, folder)
+		}
+		return c.JSON(http.StatusNoContent, nil)
+	}
+
+}
+
 func (f *Folder) Create(db *gorm.DB, v *util.Validator) func(c echo.Context) error {
 
 	return func(c echo.Context) error {

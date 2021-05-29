@@ -15,7 +15,7 @@ type Entry struct {
 	FolderID      int
 	SourceID      int
 	DestinationID uint
-	Source         EntryItem `json:"source" gorm:"association_foreignkey:Id"`
+	Source        EntryItem `json:"source" gorm:"association_foreignkey:Id"`
 	Destination   EntryItem `json:"destination" gorm:"association_foreignkeyId"`
 }
 
@@ -39,6 +39,18 @@ func (entry *Entry) GetAll(db *gorm.DB, v *util.Validator) func(c echo.Context) 
 
 		return c.JSON(http.StatusOK, entries)
 	}
+}
+
+func (entry *Entry) GetById(db *gorm.DB, v *util.Validator) func(c echo.Context) error {
+
+	return func(c echo.Context) error {
+		var entry Entry
+		entryId := c.Param("id")
+		db.Model(&entry).Where("id=?", entryId)
+
+		return c.JSON(http.StatusOK, entry)
+	}
+
 }
 
 func (entry *Entry) Create(db *gorm.DB, v *util.Validator) func(c echo.Context) error {

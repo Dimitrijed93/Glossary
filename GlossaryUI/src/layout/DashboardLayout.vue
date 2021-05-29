@@ -18,11 +18,6 @@
         <i class="nc-icon nc-bullet-list-67"></i>
         <p>Languages</p>
       </sidebar-link>
-
-      <sidebar-link to="/admin/icons">
-        <i class="nc-icon nc-notes"></i>
-        <p>Icons</p>
-      </sidebar-link>
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>

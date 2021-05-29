@@ -69,9 +69,19 @@
         text-transform: uppercase;
     }
 
-    .card-title{
+   .header-class-modal {
+        background-color: red;
+    }
+
+    .margin-items {
+        margin: 5px;
+    }
+
+    .card-title,
+    .font-color
+    {
         margin: $none;
-        color: $black-color;
+        color: #9A9A9A;
         font-weight: $font-weight-light;
     }
     .avatar{

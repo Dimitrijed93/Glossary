@@ -4,21 +4,14 @@
       <div class="row"></div>
       <div class="row">
         <div class="col-12">
-          <card class="card-plain">
+          <card class="strpied-tabled-with-hover"
+            body-classes="table-full-width table-responsive">
             <template slot="header">
-              <h4 class="card-title">Types</h4>
-            </template>
-            <div class="table-responsive">
-              <l-table
-                class="table-hover"
-                :columns="types.columns"
-                :data="types.data"
-                v-on:editItem="showEdit"
-                v-on:deleteItem="deleteItem"
-              >
-              </l-table>
-              <div class="col-12">
-                <div class="text-center">
+              <div class="row">
+                <div class="col-11">
+                  <h4 class="card-title">Types</h4>
+                </div>
+                <div class="col-1">
                   <button
                     type="submit"
                     class="btn btn-info btn-fill float-left"
@@ -28,28 +21,38 @@
                   </button>
                 </div>
               </div>
+            </template>
+
+            <div class="table-responsive">
+              <l-table
+                class="table-hover"
+                :columns="types.columns"
+                :data="types.data"
+                v-on:editItem="showEdit"
+                v-on:deleteItem="deleteItem"
+              >
+              </l-table>
             </div>
           </card>
         </div>
       </div>
     </div>
 
-    <b-modal id="type-modal" hide-footer>
-      <template #modal-title> <b>New Type</b></template>
-      <div class="row mt-3">
-        <label for="nameInput">Name: * </label>
+    <b-modal id="type-modal" title="New Type" hide-backdrop>
+      <template>
+        <label class="font-weight-bold" for="nameInput">Name: * </label>
         <input
           type="text"
           class="form-control"
           v-model="types.itemName"
           id="nameInput"
         />
-      </div>
-      <div class="row mt-3">
-        <b-button class="btn btn-primary" block @click.prevent="save"
+      </template>
+      <template #modal-footer>
+        <b-button class="btn btn-fill btn-info" block @click.prevent="save"
           >Save</b-button
-        >
-      </div>
+        ></template
+      >
     </b-modal>
   </div>
 </template>
@@ -71,8 +74,7 @@ export default {
         data: [],
         itemName: "",
         itemId: "",
-        BASE_URL: URL.LOCAL_BASE
-
+        BASE_URL: URL.LOCAL_BASE,
       },
     };
   },
