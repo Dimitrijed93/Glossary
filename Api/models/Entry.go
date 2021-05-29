@@ -3,6 +3,7 @@ package models
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/dimitrijed93/glossary/api/util"
 	"github.com/labstack/echo/v4"
@@ -12,7 +13,7 @@ import (
 type Entry struct {
 	Id            uint   `json:"id" gorm:"primaryKey"`
 	Definition    string `json:"definition"`
-	FolderID      int
+	FolderID      int    `json:"folderId"`
 	SourceID      int
 	DestinationID uint
 	Source        EntryItem `json:"source" gorm:"association_foreignkey:Id"`
@@ -38,6 +39,22 @@ func (entry *Entry) GetAll(db *gorm.DB, v *util.Validator) func(c echo.Context) 
 		db.Find(&entries)
 
 		return c.JSON(http.StatusOK, entries)
+	}
+}
+
+func (entry *Entry) GetByFolder(db *gorm.DB, v *util.Validator) func(c echo.Context) error {
+
+	return func(c echo.Context) error {
+		var result []EntryDto
+		param := c.Param("id")
+		folderId, err := strconv.Atoi(param)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, "id is required")
+		}
+
+		db.Table("entries").Select("definition", "Id").Where("folder_id = ?", folderId).Scan(&result)
+
+		return c.JSON(http.StatusOK, result)
 	}
 }
 

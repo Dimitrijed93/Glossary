@@ -23,4 +23,11 @@ func InitServer(model models.Model, db *gorm.DB, e *echo.Echo, v *util.Validator
 func InitGenericModel(model *models.GenericModel, db *gorm.DB, e *echo.Echo, v *util.Validator) {
 
 	e.GET("/folders-and-languages", model.GetFolderAndLanguageOptions(db, v))
+
+}
+
+func InitEntryServer(en *models.Entry, db *gorm.DB, e *echo.Echo, v *util.Validator) {
+	InitServer(en, db, e, v)
+	e.GET("/entries/by-folder/:id", en.GetByFolder(db, v))
+
 }

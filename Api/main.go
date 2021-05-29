@@ -45,7 +45,7 @@ func main() {
 	server.InitServer(lang, db, e, v)
 	server.InitServer(folder, db, e, v)
 	server.InitServer(item, db, e, v)
-	server.InitServer(entry, db, e, v)
+	server.InitEntryServer(entry, db, e, v)
 	server.InitServer(entryItem, db, e, v)
 	server.InitGenericModel(gm, db, e, v)
 

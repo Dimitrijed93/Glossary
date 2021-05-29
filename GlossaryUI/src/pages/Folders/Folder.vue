@@ -1,10 +1,25 @@
 <template>
   <div class="content">
     <div class="container-fluid">
+      <card>
+      <template slot="header">
+        <div class="row">
+          <div class="col-12">
+            <h4 class="card-title">Folders</h4>
+          </div>
+        </div>
+      </template>
       <div class="col-6 d-flex justify-content-start">
         <div class="margin-items d-flex flex-grow-1">
-          <select v-model="folders.folderId" class="form-control">
-            <option v-for="folder in folders.folderOptions" v-bind:value="folder.id">
+          <select
+            v-on:click="onSelectedFolder($event)"
+            v-model="folders.folderId"
+            class="form-control"
+          >
+            <option
+              v-for="folder in folders.folderOptions"
+              v-bind:value="folder.id"
+            >
               {{ itemValue(folder) }}
             </option>
           </select>
@@ -34,6 +49,8 @@
         v-bind:languageOptions="folders.languageOptions"
         ref="child"
       ></folder-modal>
+      <entry-list ref="entryList"> </entry-list>
+      </card>
     </div>
   </div>
 </template>
@@ -41,6 +58,7 @@
 <<script>
 import LTable from "src/components/Table.vue";
 import FolderModal from "./FolderModal.vue";
+import EntryList from "./EntryList.vue";
 import Card from "src/components/Cards/Card.vue";
 import axios from "axios";
 import URL from 'src/util/url';
@@ -48,6 +66,7 @@ export default {
   components: {
     LTable,
     FolderModal,
+    EntryList,
     Card,
   },
   data() {
@@ -72,6 +91,15 @@ export default {
     },
     newFolder() {
       this.$refs.child.newFolder();
+    },
+    onSelectedFolder(e) {
+      if (e) {
+        let id = e.target.value;
+        if (id) {
+          this.$refs.entryList.load(id);
+        }
+      }
+
     },
     getAll() {
       axios.get(`${this.folders.BASE_URL}/folders-and-languages`).then((response) => {

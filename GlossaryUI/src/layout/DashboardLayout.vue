@@ -2,18 +2,15 @@
   <div class="wrapper">
     <side-bar>
       <mobile-menu slot="content"></mobile-menu>
-      <sidebar-link to="/admin/overview">
-        <i class="nc-icon nc-chart-pie-35"></i>
-        <p>Dashboard</p>
+      <sidebar-link to="/admin/folders">
+        <i class="nc-icon nc-bag"></i>
+        <p>Folders</p>
       </sidebar-link>
       <sidebar-link to="/admin/types">
         <i class="nc-icon nc-notes"></i>
         <p>Types</p>
       </sidebar-link>
-      <sidebar-link to="/admin/folders">
-        <i class="nc-icon nc-bag"></i>
-        <p>Folders</p>
-      </sidebar-link>
+
       <sidebar-link to="/admin/languages">
         <i class="nc-icon nc-bullet-list-67"></i>
         <p>Languages</p>
