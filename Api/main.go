@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	models "github.com/dimitrijed93/glossary/api/models"
-	server "github.com/dimitrijed93/glossary/api/server"
+	"github.com/dimitrijed93/glossary/api/server"
 	util "github.com/dimitrijed93/glossary/api/util"
 
 	"github.com/labstack/echo/v4"
@@ -16,7 +16,7 @@ import (
 func main() {
 	e := echo.New()
 
-	db, err := gorm.Open(postgres.Open(util.CONNECTION_STRING_LOCAL), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(util.CONNECTION_STRING_K8), &gorm.Config{})
 
 	if err != nil {
 		panic("failed to connect database")
@@ -37,12 +37,16 @@ func main() {
 	item := models.NewExtraItem()
 	entry := models.NewEntry()
 	entryItem := models.NewEntryItem()
+	lang := models.NewLanguage()
+	gm := models.NewGenericModel()
 
 	server.InitServer(typeObj, db, e, v)
+	server.InitServer(lang, db, e, v)
 	server.InitServer(folder, db, e, v)
 	server.InitServer(item, db, e, v)
 	server.InitServer(entry, db, e, v)
 	server.InitServer(entryItem, db, e, v)
+	server.InitGenericModel(gm, db, e, v)
 
 	if err != nil {
 		panic("failed to get db object")
@@ -78,6 +82,7 @@ func ConnectToDB() *gorm.DB {
 	db.AutoMigrate(&models.Type{})
 	db.AutoMigrate(&models.EntryItem{})
 	db.AutoMigrate(&models.Entry{})
+	db.AutoMigrate(&models.Language{})
 
 	return db
 

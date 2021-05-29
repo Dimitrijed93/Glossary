@@ -10,47 +10,49 @@
         <i class="nc-icon nc-notes"></i>
         <p>Types</p>
       </sidebar-link>
-
+      <sidebar-link to="/admin/folders">
+        <i class="nc-icon nc-bag"></i>
+        <p>Folders</p>
+      </sidebar-link>
+      <sidebar-link to="/admin/languages">
+        <i class="nc-icon nc-bullet-list-67"></i>
+        <p>Languages</p>
+      </sidebar-link>
 
       <sidebar-link to="/admin/icons">
         <i class="nc-icon nc-notes"></i>
         <p>Icons</p>
       </sidebar-link>
-      
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
 
-      <dashboard-content @click="toggleSidebar">
-
-      </dashboard-content>
+      <dashboard-content @click="toggleSidebar"> </dashboard-content>
 
       <content-footer></content-footer>
     </div>
   </div>
 </template>
 <style lang="scss">
-
 </style>
 <script>
-  import TopNavbar from './TopNavbar.vue'
-  import ContentFooter from './ContentFooter.vue'
-  import DashboardContent from './Content.vue'
-  import MobileMenu from './MobileMenu.vue'
-  export default {
-    components: {
-      TopNavbar,
-      ContentFooter,
-      DashboardContent,
-      MobileMenu
-    },
-    methods: {
-      toggleSidebar () {
-        if (this.$sidebar.showSidebar) {
-          this.$sidebar.displaySidebar(false)
-        }
+import TopNavbar from "./TopNavbar.vue";
+import ContentFooter from "./ContentFooter.vue";
+import DashboardContent from "./Content.vue";
+import MobileMenu from "./MobileMenu.vue";
+export default {
+  components: {
+    TopNavbar,
+    ContentFooter,
+    DashboardContent,
+    MobileMenu,
+  },
+  methods: {
+    toggleSidebar() {
+      if (this.$sidebar.showSidebar) {
+        this.$sidebar.displaySidebar(false);
       }
-    }
-  }
-
+    },
+  },
+};
 </script>

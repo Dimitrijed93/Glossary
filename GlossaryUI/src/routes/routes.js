@@ -8,6 +8,8 @@ import UserProfile from 'src/pages/UserProfile.vue'
 import TableList from 'src/pages/TableList.vue'
 import Typography from 'src/pages/Typography.vue'
 import Types from 'src/pages/Types/Types.vue'
+import Folder from 'src/pages/Folders/Folder.vue'
+import Language from 'src/pages/Languages/Language.vue'
 import Icons from 'src/pages/Icons.vue'
 import Maps from 'src/pages/Maps.vue'
 import Notifications from 'src/pages/Notifications.vue'
@@ -33,6 +35,16 @@ const routes = [
         path: '/admin/types',
         name: 'Types',
         component: Types
+      },
+      {
+        path: '/admin/folders',
+        name: 'Folders',
+        component: Folder
+      },
+      {
+        path: '/admin/languages',
+        name: 'Languages',
+        component: Language
       },
       {
         path: 'table-list',

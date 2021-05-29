@@ -17,3 +17,8 @@ func InitServer(model models.Model, db *gorm.DB, e *echo.Echo, v *util.Validator
 
 	e.PUT(model.DetailUrl(), model.Update(db, v))
 }
+
+func InitGenericModel(model *models.GenericModel, db *gorm.DB, e *echo.Echo, v *util.Validator) {
+
+	e.GET("/folders-and-languages", model.GetFolderAndLanguageOptions(db, v))
+}

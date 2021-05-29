@@ -10,8 +10,12 @@ import (
 )
 
 type Folder struct {
-	Id   uint   `gorm:"primaryKey" json:"id"`
-	Name string `json:"name" validate:"required"`
+	Id                    uint     `gorm:"primaryKey" json:"id"`
+	Name                  string   `json:"name" validate:"required"`
+	SourceLanguage        Language `json:"sourceLanguage" gorm:"association_foreignkey:Id" validate:"required"`
+	SourceLanguageID      int
+	DestinationLanguage   Language `json:"destinationLanguage" gorm:"association_foreignkey:Id" validate:"required"`
+	DestinationLanguageID int
 }
 
 func NewFolder() *Folder {

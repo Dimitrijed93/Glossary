@@ -6,13 +6,13 @@
         <div class="col-12">
           <card class="card-plain">
             <template slot="header">
-              <h4 class="card-title">Types</h4>
+              <h4 class="card-title">Languages</h4>
             </template>
             <div class="table-responsive">
               <l-table
                 class="table-hover"
-                :columns="types.columns"
-                :data="types.data"
+                :columns="languages.columns"
+                :data="languages.data"
                 v-on:editItem="showEdit"
                 v-on:deleteItem="deleteItem"
               >
@@ -34,14 +34,14 @@
       </div>
     </div>
 
-    <b-modal id="type-modal" hide-footer>
-      <template #modal-title> <b>New Type</b></template>
+    <b-modal id="language-modal" hide-footer>
+      <template #modal-title> <b>New Language</b></template>
       <div class="row mt-3">
         <label for="nameInput">Name: * </label>
         <input
           type="text"
           class="form-control"
-          v-model="types.itemName"
+          v-model="languages.itemName"
           id="nameInput"
         />
       </div>
@@ -58,7 +58,7 @@
 import LTable from "src/components/Table.vue";
 import Card from "src/components/Cards/Card.vue";
 import axios from "axios";
-const tableColumns = ["Value"];
+const tableColumns = ["Name"];
 export default {
   components: {
     LTable,
@@ -66,7 +66,7 @@ export default {
   },
   data() {
     return {
-      types: {
+      languages: {
         columns: [...tableColumns],
         data: [],
         itemName: "",
@@ -81,15 +81,15 @@ export default {
   },
   methods: {
     getAll() {
-      axios.get(`${this.types.BASE_URL}/types`).then((response) => {
-        this.types["data"] = response.data;
+      axios.get(`${this.languages.BASE_URL}/languages`).then((response) => {
+        this.languages["data"] = response.data;
       });
     },
     add() {
-      this.$bvModal.show("type-modal");
+      this.$bvModal.show("language-modal");
     },
     save() {
-      let id = this.types["itemId"];
+      let id = this.languages["itemId"];
       if (id) {
         this.edit(id);
       } else {
@@ -97,35 +97,36 @@ export default {
       }
     },
     doSave() {
-      let value = this.types["itemName"];
+      let name = this.languages["itemName"];
       axios
-        .post(`${this.types.BASE_URL}/types`, {
-          value,
+        .post(`${this.languages.BASE_URL}/languages`, {
+          name,
         })
         .then(() => {
-          this.$bvModal.hide("type-modal");
+          this.$bvModal.hide("language-modal");
           this.getAll();
         });
     },
     edit(id) {
-      let value = this.types["itemName"];
+      let name = this.languages["itemName"];
       axios
-        .put(`${this.types.BASE_URL}/types/${id}`, {
-          value: value,
+        .put(`${this.languages.BASE_URL}/languages/${id}`, {
+          name: name,
           id: id,
         })
         .then(() => {
-          this.$bvModal.hide("type-modal");
+          this.$bvModal.hide("language-modal");
           this.getAll();
         });
     },
     showEdit(item) {
-      this.types["itemName"] = item.value;
-      this.types["itemId"] = item.id;
-      this.$bvModal.show("type-modal");
+      this.languages["itemName"] = item.name;
+      this.languages["itemId"] = item.id;
+      this.$bvModal.show("language-modal");
     },
     deleteItem(item) {
-      axios.delete(`${this.types.BASE_URL}/types/${item.id}`).then(() => {
+      debugger
+      axios.delete(`${this.languages.BASE_URL}/languages/${item.id}`).then(() => {
         this.getAll();
       });
     },
